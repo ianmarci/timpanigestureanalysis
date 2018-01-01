@@ -41,7 +41,6 @@ def choose_test_set(choice):
             # Otherwise, put file in train folder
             shutil.copy2(datapath + filename, trainpath)
 
-
 # Fetches data from specified path and reads it into batch data and batch labels
 def get_network_input(path):
     Files = [file for file in glob.glob(path + '**/*.txt', recursive=True)]
@@ -53,7 +52,7 @@ def get_network_input(path):
 
     random.shuffle(dataFiles)
     batch_labels = np.zeros((len(dataFiles), 6))
-    batch_data = np.zeros((len(dataFiles), 245))
+    batch_data = np.zeros((len(dataFiles), 200))
     n = 0
     for i in range(0, len(dataFiles)):
         filename = dataFiles[i]

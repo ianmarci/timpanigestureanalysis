@@ -1,12 +1,3 @@
-'''
-    Gather labels, max acceleration, and velocity at indices 20, 25, 35, and 40
-for each of the strokes. Combine this data into a label array and a 1x5 data array
-in two lines of a text file. The first line, the label array, will be used to check
-against the networks output to determine accuracy. The second line, the data array,
-will be fed into a layer of perceptrons and classified.
-    Bouenard mentions that velocity and acceleration are best markers for french
-grip, but perhaps using position or different combinations should be investigated.
-'''
 import glob
 import numpy as np
 

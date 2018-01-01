@@ -12,7 +12,7 @@ def get_network_input(path):
 
     random.shuffle(dataFiles)
     batch_labels = np.zeros((len(dataFiles), 6))
-    batch_data = np.zeros((len(dataFiles), 245))
+    batch_data = np.zeros((len(dataFiles), 200))
     n = 0
     for i in range(0, len(dataFiles)):
         filename = dataFiles[i]
