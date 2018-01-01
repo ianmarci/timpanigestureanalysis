@@ -1,32 +1,38 @@
+import tensorflow as tf
 import numpy as np
 
-from classifier_function import classifier
-from choose_test_set import choose_test_set
+from data_input_functions import *
 
+trainpath = 'Data/NetworkTrain/'
+testpath = 'Data/NetworkTest/'
 
-#accuracies = np.zeros(21, 10) 3 counts * 7 folds, 10 accuracies each
+xtr = tf.placeholder('float', [None, 245])
+xte = tf.placeholder('float', [245])
 
-accuracies = np.zeros((4, 1))
+distance = tf.reduce_sum(tf.abs(tf.add(xtr, tf.negative(xte))), reduction_indices=1)
+pred = tf.argmin(distance, 0)
 
-for i in range(0, 4):
-    choice = i + 1
+accuracy = 0
 
-    choose_test_set(str(choice))
+init = tf.global_variables_initializer()
 
+with tf.Session() as sess:
+    for i in range(4):
+        sess.run(init)
+        accuracy = 0
+        choice = i + 1
+        choose_test_set(str(choice))
 
-    accuracies[i, 0] = classifier()
-    print('Accuracy: ', accuracies[i, 0])
-    iteration = i
-    print('Iteration', iteration + 1,'of 4.')
+        train_data, train_labels = get_network_input(trainpath)
+        test_data, test_labels = get_network_input(testpath)
 
+        for i in range(len(test_data)):
+            nn_index = sess.run(pred, feed_dict={xtr: train_data, xte: test_data[i, :]})
+            prediction = np.argmax(train_labels[nn_index])
+            correct_answer = np.argmax(test_labels[i])
+            print('Test', i, 'Prediction: ', prediction,
+                'True Class: ', correct_answer)
+            if prediction == correct_answer:
+                accuracy += 1./len(test_data)
 
-
-#print(accuracies)
-f = open('TestAccuracy.txt', 'w')
-for k in range(0, len(accuracies)):
-    f.write('Test ' + str(k) + '\r\n')
-    average = np.mean(accuracies[k])
-    f.write('    Average Accuracy: ' + str(average) + '\r\n')
-    f.write('    Accuracy: ' + str(accuracies[k,:]) + '\r\n')
-    #print('Accuracy:', accuracy)
-f.close()
+        print('Test Accuracy:', accuracy)
