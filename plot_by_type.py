@@ -12,7 +12,7 @@ hand = sys.argv[2]
 if (len(sys.argv) != 3 or hand not in hand_options
     or choice not in data_options):
 
-    print('Usage Error: plotAveragebyType.py dataTypeChoice hand')
+    print('Usage Error: plot_by_type.py data_type_choice hand')
     print('dataTypeChoice options: stroke, velocity, acceleration')
     print('hand options: R, L')
     print('Example: plotAveragebyType.py velocity R')
@@ -26,7 +26,7 @@ if choice == 'velocity':
 elif choice == 'acceleration':
     print('Showing stroke acceleration data')
     mypath = 'Data/StrokeAccelerationData'
-    length = 200
+    length = 199
     yLabel = 'Acceleration (m/s^2)'
 elif choice == 'stroke':
     print('Showing stroke position data')
@@ -94,56 +94,34 @@ for filename in allFiles:
     if hand in filename:
         parts = filename.split('.')
         name = parts[0]
+        print(name)
         f = open(mypath + '/' + filename, 'r')
         lines = [line.rstrip('\r\n') for line in f]
         label = lines[0]
         data = lines[2].split(' ')
+        print(data)
         if name.startswith('Accent'):
             for i in range(0, length):
-                if abs(float(data[i]) / 1000.0) > 15:
-                    print(filename)
-                if i == 199 and float(data[i]) == 0:
-                    print(filename)
                 accent[accentptr, i] = float(data[i]) / 1000.0
             accentptr += 1
         if name.startswith('Normal'):
             for i in range(0, length):
-                if abs(float(data[i]) / 1000.0) > 15:
-                    print(filename)
-                if i == 199 and float(data[i]) == 0:
-                    print(filename)
                 normal[normalptr, i] = float(data[i]) / 1000.0
             normalptr += 1
         if name.startswith('Piston'):
             for i in range(0, length):
-                if abs(float(data[i]) / 1000.0) > 15:
-                    print(filename)
-                if i == 0 and float(data[i]) == 0:
-                    print(filename)
                 piston[pistonptr, i] = float(data[i])/ 1000.0
             pistonptr += 1
         if name.startswith('Staccato'):
             for i in range(0, length):
-                if abs(float(data[i]) / 1000.0) > 15:
-                    print(filename)
-                if i == 0 and float(data[i]) == 0:
-                    print(filename)
                 staccato[staccatoptr, i] = float(data[i])/ 1000.0
             staccatoptr += 1
         if name.startswith('Tenuto'):
             for i in range(0, length):
-                if abs(float(data[i]) / 1000.0) > 15:
-                    print(filename)
-                if i == 0 and float(data[i]) == 0:
-                    print(filename)
                 tenuto[tenutoptr, i] = float(data[i]) / 1000.0
             tenutoptr += 1
         if name.startswith('Vertical'):
             for i in range(0, length):
-                if abs(float(data[i]) / 1000.0) > 15:
-                    print(filename)
-                if i == 0 and float(data[i]) == 0:
-                    print(filename)
                 vertical[verticalptr, i] = float(data[i]) / 1000.0
             verticalptr += 1
 '''
