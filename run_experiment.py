@@ -29,6 +29,8 @@ pred = tf.argmin(distance, 0)
 
 init = tf.global_variables_initializer()
 with tf.Session() as sess:
+    predictions = []
+    labels = []
     for i in range(4):
         sess.run(init)
 
@@ -39,16 +41,16 @@ with tf.Session() as sess:
         test_data, test_labels = get_network_input(test_path)
 
         accuracy = 0
-        predictions = np.zeros((len(test_data)))
-        labels = np.zeros((len(test_data)))
+
 
         for i in range(len(test_data)):
             nn_index = sess.run(pred, feed_dict={x_train: train_data,
                                                  x_test: test_data[i, :]})
-            predictions[i] = np.argmax(train_labels[nn_index])
-            labels[i] = np.argmax(test_labels[i])
-            if predictions[i] == labels[i]:
+            predictions.append(np.argmax(train_labels[nn_index]))
+            labels.append(np.argmax(test_labels[i]))
+
+            if predictions[-1] == labels[-1]:
                 accuracy += 1./len(test_data)
-        confusion = tf.confusion_matrix(labels=labels, predictions=predictions)
-        print(confusion.eval())
         print('Test Accuracy:', accuracy)
+    confusion = tf.confusion_matrix(labels=labels, predictions=predictions)
+    print(confusion.eval())

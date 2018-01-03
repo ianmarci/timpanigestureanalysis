@@ -94,12 +94,10 @@ for filename in allFiles:
     if hand in filename:
         parts = filename.split('.')
         name = parts[0]
-        print(name)
         f = open(mypath + '/' + filename, 'r')
         lines = [line.rstrip('\r\n') for line in f]
         label = lines[0]
         data = lines[2].split(' ')
-        print(data)
         if name.startswith('Accent'):
             for i in range(0, length):
                 accent[accentptr, i] = float(data[i]) / 1000.0
@@ -124,14 +122,7 @@ for filename in allFiles:
             for i in range(0, length):
                 vertical[verticalptr, i] = float(data[i]) / 1000.0
             verticalptr += 1
-'''
-accent = accent[np.all(accent !=0, axis=1)]
-normal = normal[np.all(normal !=0, axis=1)]
-piston = piston[np.all(piston !=0, axis=1)]
-staccato = staccato[np.all(staccato !=0, axis=1)]
-tenuto = tenuto[np.all(tenuto !=0, axis=1)]
-vertical = vertical[np.all(vertical !=0, axis=1)]
-'''
+
 # Plot all
 plt.figure()
 plt.subplot(231)

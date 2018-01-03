@@ -8,7 +8,7 @@ import os
 # Function which randomly divides files in the selected folder into 4 equal    #
 # sets. User chooses which data folder to use as well as the hand to study.    #
 #                                                                              #
-# Recommended usage: python divide_into_sets.py 'Data/StrokePositionData' R    #
+# Recommended usage: python divide_into_sets.py 'Data\StrokePositionData' R    #
 #                                                                              #
 # Data would be 200 position points of the right mallet.                       #
 # Data sets will be placed in 'Data/NetworkInput' for future classification.   #
@@ -49,7 +49,11 @@ data_path = data_path + '\\'
 
 # Create set folders
 for Set in sets:
-    os.makedirs(out_path + Set)
+    try:
+        shutil.rmtree(out_path + Set)
+        os.makedirs(out_path + Set)
+    except:
+        os.makedirs(out_path + Set)
 
 # Fill each folder
 n = 0

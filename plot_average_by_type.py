@@ -124,51 +124,22 @@ def get_averages(mypath, hand):
         vAverage.append(SUM / len(vertical))
         SUM = 0
 
-    aCorrCoef = []
-    nCorrCoef = []
-    pCorrCoef = []
-    sCorrCoef = []
-    tCorrCoef = []
-    vCorrCoef = []
-
-    for i in range(0, len(accent)):
-        coef = np.corrcoef(accent[i], aAverage)
-        aCorrCoef.append(coef[0, 1])
-    for i in range(0, len(normal)):
-        coef = np.corrcoef(normal[i], nAverage)
-        nCorrCoef.append(coef[0, 1])
-    for i in range(0, len(piston)):
-        coef = np.corrcoef(piston[i], pAverage)
-        pCorrCoef.append(coef[0, 1])
-    for i in range(0, len(staccato)):
-        coef = np.corrcoef(staccato[i], sAverage)
-        sCorrCoef.append(coef[0, 1])
-    for i in range(0, len(tenuto)):
-        coef = np.corrcoef(tenuto[i], tAverage)
-        tCorrCoef.append(coef[0, 1])
-    for i in range(0, len(vertical)):
-        coef = np.corrcoef(vertical[i], vAverage)
-        vCorrCoef.append(coef[0, 1])
-
-    names = ['accentCorrCoeff.txt', 'normalCorrCoeff.txt',
-             'pistonCorrCoeff.txt', 'staccatoCorrCoeff.txt',
-             'tenutoCorrCoeff.txt', 'verticalCorrCoeff.txt']
-    data = [aCorrCoef, nCorrCoef, pCorrCoef, sCorrCoef, tCorrCoef, vCorrCoef]
-
-    for i in range(0, len(names)):
-        f = open(names[i], 'w')
-        coefs = data[i]
-        for coef in coefs:
-            f.write(str(coef) + ' ')
-        f.close()
     return aAverage, nAverage, pAverage, sAverage, tAverage, vAverage
 
-def plot_all(yLabel, aAverage, nAverage, pAverage, sAverage, tAverage, vAverage):
+def plot_all(yLabel, hand, aAverage, nAverage,
+                           pAverage, sAverage,
+                           tAverage, vAverage):
+    if hand == 'R':
+        hand = 'right'
+    else:
+        hand = 'left'
     plt.figure()
+    # Convert 200 points taken at 250 Hz to ms
     x = list(range(length))
     offset = length/2 - 1
     for i in range(len(x)):
         x[i] = (x[i] - offset)*4
+
     plt.plot(x, aAverage, label='Accent', linewidth=3.0)
     plt.plot(x, nAverage, label='Normal', linewidth=3.0)
     plt.plot(x, pAverage, label='Piston', linewidth=3.0)
@@ -178,6 +149,13 @@ def plot_all(yLabel, aAverage, nAverage, pAverage, sAverage, tAverage, vAverage)
     plt.legend(loc='lower right')
     plt.xlabel('Time (ms)')
     plt.ylabel(yLabel)
+
+    if 'Height' in yLabel:
+        plt.title('Average %s mallet height by stroke type' % hand)
+    elif 'Velocity' in yLabel:
+        plt.title('Average %s mallet velocity by stroke type' % hand)
+    elif 'Acceleration' in yLabel:
+        plt.title('Average %s mallet acceleration by stroke type' % hand)
     plt.show()
 
 
@@ -202,18 +180,24 @@ if choice == 'velocity':
     length = 200
     yLabel = 'Velocity (m/s)'
     aAverage, nAverage, pAverage, sAverage, tAverage, vAverage = get_averages(mypath, hand)
-    plot_all(yLabel, aAverage, nAverage, pAverage, sAverage, tAverage, vAverage)
+    plot_all(yLabel, hand, aAverage, nAverage,
+                           pAverage, sAverage,
+                           tAverage, vAverage)
 elif choice == 'acceleration':
     print('Showing stroke acceleration data')
     mypath = 'Data/StrokeAccelerationData'
     length = 200
     yLabel = 'Acceleration (m/s^2)'
     aAverage, nAverage, pAverage, sAverage, tAverage, vAverage = get_averages(mypath, hand)
-    plot_all(yLabel, aAverage, nAverage, pAverage, sAverage, tAverage, vAverage)
+    plot_all(yLabel, hand, aAverage, nAverage,
+                           pAverage, sAverage,
+                           tAverage, vAverage)
 elif choice == 'stroke':
     print('Showing stroke position data')
     mypath = 'Data/StrokePositionData'
     length = 200
     yLabel = 'Height (m)'
     aAverage, nAverage, pAverage, sAverage, tAverage, vAverage = get_averages(mypath, hand)
-    plot_all(yLabel, aAverage, nAverage, pAverage, sAverage, tAverage, vAverage)
+    plot_all(yLabel, hand, aAverage, nAverage,
+                           pAverage, sAverage,
+                           tAverage, vAverage)
