@@ -31,13 +31,6 @@ for position in positions:
     data_files = [file for file in glob.glob(data_path + '*/**/*.csv',
                                                 recursive=True)]
 
-    # When reading file paths, / is replaced with \\. This undos that.
-    data_files_clean = []
-    for filename in data_files:
-        parts = filename.split('\\')
-        outfile = parts[1] + '/' + parts[2]
-        data_files_clean.append(outfile)
-
 
     stroke_type = ['Accent', 'Accent','Accent', 'Accent',
                   'Normal','Normal','Normal','Normal',
@@ -54,8 +47,8 @@ for position in positions:
                    '000001','000001','000001','000001']
 
     # Extract data from each of the discovered files
-    for i in range(0, len(data_files_clean)-1):
-        filename = data_path + data_files_clean[i]
+    for i in range(0, len(data_files)):
+        filename = data_files[i]
 
         # Extract from csv
         frames, Rt_y, Rt_z = get_data(filename)
@@ -80,10 +73,10 @@ for position in positions:
             position = 'rim'
 
         for j in range(0, len(stroke_data)):
-            if 'left' in data_files_clean[i]:
+            if 'left' in data_files[i]:
                 filename = outPath + stroke_type[i] + position + 'L' + str(Lcount) + '.txt'
                 Lcount += 1
-            if 'right' in data_files_clean[i]:
+            if 'right' in data_files[i]:
                 filename = outPath + stroke_type[i] + position + 'R' + str(Rcount) + '.txt'
                 Rcount += 1
             f = open(filename, 'w')

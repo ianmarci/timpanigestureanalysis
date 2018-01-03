@@ -6,13 +6,6 @@ import numpy as np
 def get_averages(mypath, hand):
     files = [file for file in glob.glob(mypath + '*/**/*.txt', recursive=True)]
 
-    allFiles = []
-    for filename in files:
-        if hand in filename:
-            parts = filename.split('\\')
-            outfile = parts[2]
-            allFiles.append(outfile)
-
     # Count number of each stroke type
     numAccent = 0
     numNormal = 0
@@ -21,18 +14,18 @@ def get_averages(mypath, hand):
     numTenuto = 0
     numVertical = 0
 
-    for name in allFiles:
-        if name.startswith('Accent'):
+    for filename in files:
+        if 'Accent' in filename:
             numAccent += 1
-        if name.startswith('Normal'):
+        if 'Normal' in filename:
             numNormal += 1
-        if name.startswith('Piston'):
+        if 'Piston' in filename:
             numPiston += 1
-        if name.startswith('Staccato'):
+        if 'Staccato' in filename:
             numStaccato += 1
-        if name.startswith('Tenuto'):
+        if 'Tenuto' in filename:
             numTenuto += 1
-        if name.startswith('Vertical'):
+        if 'Vertical' in filename:
             numVertical += 1
 
     # Create matrices to be used to calculate the average of each stroke type
@@ -51,34 +44,32 @@ def get_averages(mypath, hand):
     verticalptr = 0
 
     # Fill matrices
-    for filename in allFiles:
-        parts = filename.split('.')
-        name = parts[0]
-        f = open(mypath + '/' + filename, 'r')
+    for filename in files:
+        f = open(filename, 'r')
         lines = [line.rstrip('\r\n') for line in f]
         label = lines[0]
         data = lines[2].split(' ')
-        if name.startswith('Accent'):
+        if 'Accent' in filename:
             for i in range(0, length):
                 accent[accentptr, i] = data[i]
             accentptr += 1
-        if name.startswith('Normal'):
+        if 'Normal' in filename:
             for i in range(0, length):
                 normal[normalptr, i] = data[i]
             normalptr += 1
-        if name.startswith('Piston'):
+        if 'Piston' in filename:
             for i in range(0, length):
                 piston[pistonptr, i] = data[i]
             pistonptr += 1
-        if name.startswith('Staccato'):
+        if 'Staccato' in filename:
             for i in range(0, length):
                 staccato[staccatoptr, i] = data[i]
             staccatoptr += 1
-        if name.startswith('Tenuto'):
+        if 'Tenuto' in filename:
             for i in range(0, length):
                 tenuto[tenutoptr, i] = data[i]
             tenutoptr += 1
-        if name.startswith('Vertical'):
+        if 'Vertical' in filename:
             for i in range(0, length):
                 vertical[verticalptr, i] = data[i]
             verticalptr += 1
