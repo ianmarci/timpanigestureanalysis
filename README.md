@@ -5,3 +5,5 @@ Project to visualize and classify different musical articulations of a timpani p
 ## Getting Started
 
 The project is written using Python 3.5.4 and has not yet been made backwards compatible. The following libraries are required:
+
+'''numpy matplotlib'''
