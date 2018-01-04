@@ -1,7 +1,8 @@
 ################################################################################
 # run_experiment.py                                                            #
 # Ian Marci  2017                                                              #
-# Defines knn classifier and runs 4-fold on data in Data/NetworkInput.         #
+# Defines knn classifier and runs 4-fold cross validation on data in           #
+# Data/NetworkInput folder.                                                    #
 # Prints accuracy for each fold as well as confusion matrix.                   #
 ################################################################################
 
@@ -31,6 +32,7 @@ init = tf.global_variables_initializer()
 with tf.Session() as sess:
     predictions = []
     labels = []
+    accuracies = []
     for i in range(4):
         sess.run(init)
 
@@ -40,8 +42,7 @@ with tf.Session() as sess:
         train_data, train_labels = get_network_input(train_path)
         test_data, test_labels = get_network_input(test_path)
 
-        accuracy = 0
-
+        fold_accuracy = 0
 
         for i in range(len(test_data)):
             nn_index = sess.run(pred, feed_dict={x_train: train_data,
@@ -50,7 +51,10 @@ with tf.Session() as sess:
             labels.append(np.argmax(test_labels[i]))
 
             if predictions[-1] == labels[-1]:
-                accuracy += 1./len(test_data)
-        print('Test Accuracy:', accuracy)
+                fold_accuracy += 1./len(test_data)
+        accuracies.append(fold_accuracy)
+        
+    overall_accuracy = np.mean(accuracies)
+    print('Average accuracy over 4 folds:', overall_accuracy)
     confusion = tf.confusion_matrix(labels=labels, predictions=predictions)
     print(confusion.eval())

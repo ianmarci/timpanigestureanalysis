@@ -36,7 +36,7 @@ for n in range(len(data_files)):
     remove_flag = 0
 
     for i in range(200):
-        if (i <= 85 or i >= 115) and abs(all_data[n, i]) > 200:
+        if (i <= 85 or i >= 115) and abs(all_data[n, i]) > 300:
             remove_flag = 1
     if remove_flag:
         to_remove.append(data_files[n])
