@@ -3,7 +3,7 @@ from get_data import get_data
 import matplotlib.pyplot as plt
 
 if len(sys.argv) != 2:
-    print('Incorrect usage: plotRawData.py fileToPlot')
+    print('Incorrect usage: plot_raw_data.py file_to_plot')
     sys.exit()
 
 try:
@@ -20,7 +20,7 @@ try:
         x[i] = x[i] / 250
 
     plt.plot(x, Rt_z)
-    plt.title('Right Hand Vertical Displacement')
+    plt.title('Mallet Vertical Displacement')
     plt.xlabel('Time (s)')
     plt.ylabel('Position (m)')
     plt.show()
