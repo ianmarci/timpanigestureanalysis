@@ -14,7 +14,7 @@ import random
 
 ###################
 # Choose test set #
-##################
+###################
 # Places data from one set into testing data, the other three into training
 def choose_test_set(choice):
     testChoice = 'Set ' + choice
