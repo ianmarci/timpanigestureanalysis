@@ -1,14 +1,20 @@
 ################################################################################
+# remove_outliers.py                                                           #
+# Ian Marci 2017                                                               #
 # Remove accelerations that have magnitude greater than 200 before index 85 or #
 # after index 115. A magnitude of 200 outside this range is due to anomalies   #
 # in data collection, e.g. zero padding due to start or end of file, or        #
 # mistakes in automatic gap-filling in the motion capture software.            #
 ################################################################################
 
+# Imports
 import glob
 import os
 import numpy as np
 
+########
+# Main #
+########
 # Fetch all acceleration files
 data_path = 'Data/StrokeAccelerationData/'
 data_files = [file for file in glob.glob(data_path + '*.txt')]
@@ -41,9 +47,6 @@ for n in range(len(data_files)):
     if remove_flag:
         to_remove.append(data_files[n])
 
-print(to_remove)
-print(len(to_remove))
-
 # Remove outliers from StrokeAccelerationData
 for file_name in to_remove:
     os.remove(file_name)
@@ -58,7 +61,8 @@ position_ending = '.txt'
 for file_name in to_remove:
     parts = file_name.split('\\')
     identifier = parts[1].split('Accel')[0]
-    print(identifier)
 
     os.remove(velocity_path + identifier + velocity_ending)
     os.remove(position_path + identifier + position_ending)
+
+print('Removed', len(to_remove), 'files.')

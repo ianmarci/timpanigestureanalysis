@@ -1,13 +1,6 @@
-# Ian Marci 2017
-import numpy as np
-import glob
-
-from data_acquisition_functions import get_data, detect_peaks
-from data_acquisition_functions import get_strike_info, get_derivative
-
-print('Running')
-
 ################################################################################
+# segment_stroke_data.py                                                       #
+# Ian Marci 2017                                                               #
 #   For each position, read information from csv file and output a text file   #
 # containing a list of position data for each type of stroke (accent, normal,  #
 # piston, staccato, tenuto, and vertical) at each position(center, normal,     #
@@ -20,6 +13,16 @@ print('Running')
 # so only position is used.                                                    #
 ################################################################################
 
+# Imports
+import numpy as np
+import glob
+
+from data_acquisition_functions import get_data, detect_peaks
+from data_acquisition_functions import get_strike_info, get_derivative
+
+########
+# Main #
+########
 # Raw data is located in folders corresponding to each strike area then stroke
 # type. e.g. Data/Raw Data/Center/AccentCenter/left1.csv
 

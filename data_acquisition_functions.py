@@ -1,8 +1,19 @@
+################################################################################
+# data_acquisition_functions.py                                                #
+# Ian Marci 2017                                                               #
+# Defines functions which extract and manipulate data into a form usable by the#
+# classifier and visualization scripts.                                        #
+################################################################################
 
+# Imports
 from __future__ import division, print_function
 import numpy as np
 import csv
 
+############
+# Get data #
+############
+# Extracts raw data from csv files
 def get_data(filename):
 
     with open(filename, newline='') as f:
@@ -36,6 +47,11 @@ def get_data(filename):
                 continue
     return frames, t_y, t_z
 
+################
+# Detect peaks #
+################
+# Identifies valleys in raw data to locate likely impacts with the drum head
+# Written by Marcos Duarte
 def detect_peaks(x, mph=None, mpd=1, threshold=0, edge='rising',
                  kpsh=False, valley=False, show=False, ax=None):
 
@@ -176,6 +192,12 @@ def detect_peaks(x, mph=None, mpd=1, threshold=0, edge='rising',
 
     return ind
 
+###################
+# Get strike info #
+###################
+# Uses detect_peaks to identify likely strokes. Once stroke is confirmed, it
+# extracts 100 points of data before and after the stroke. The preparation and
+# movement following the stroke are indicative of the articulation.
 def get_strike_info(data):
     strikeLocs = detect_peaks(data, valley=True)
     strikeHeight = []
@@ -215,6 +237,12 @@ def get_strike_info(data):
 
     return finalData
 
+##################
+# Get derivative #
+##################
+# Calculates derivative using the definition of derivative.
+# (change in function) / (change in time)
+# Data was collected at 250 Hz
 def get_derivative(position):
     velocity = [0]
     for i in range(0, len(position) - 2):

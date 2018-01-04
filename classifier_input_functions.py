@@ -1,10 +1,20 @@
+################################################################################
+# classifier_input_functions.py                                                #
+# Ian Marci 2017                                                               #
+# Defines functions which are used by k-nearest neighbor classifier when       #
+# running the experiment.                                                      #
+################################################################################
+
+# Imports
 import os
 import shutil
 import glob
 import numpy as np
 import random
 
-
+###################
+# Choose test set #
+##################
 # Places data from one set into testing data, the other three into training
 def choose_test_set(choice):
     testChoice = 'Set ' + choice
@@ -21,11 +31,10 @@ def choose_test_set(choice):
     os.makedirs(testpath)
     os.makedirs(trainpath)
 
-    #########################################################
-    # Replace contents with correct training and testing data
-    #########################################################
+    # Read all files from NetworkInput
     files = [file for file in glob.glob(datapath + '*/**/*.txt', recursive=True)]
 
+    # Place files into correct training and testing folders based on set number
     allFolders = []
     allFiles = []
     for filename in files:
@@ -41,6 +50,9 @@ def choose_test_set(choice):
             # Otherwise, put file in train folder
             shutil.copy2(datapath + filename, trainpath)
 
+#####################
+# Get network input #
+#####################
 # Fetches data from specified path and reads it into batch data and batch labels
 def get_network_input(path):
     Files = [file for file in glob.glob(path + '**/*.txt', recursive=True)]

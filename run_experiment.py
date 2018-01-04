@@ -6,9 +6,9 @@
 # Prints accuracy for each fold as well as confusion matrix.                   #
 ################################################################################
 
+# Imports
 import tensorflow as tf
 import numpy as np
-
 from classifier_input_functions import choose_test_set, get_network_input
 
 # Path and placeholder definitions
@@ -53,7 +53,7 @@ with tf.Session() as sess:
             if predictions[-1] == labels[-1]:
                 fold_accuracy += 1./len(test_data)
         accuracies.append(fold_accuracy)
-        
+
     overall_accuracy = np.mean(accuracies)
     print('Average accuracy over 4 folds:', overall_accuracy)
     confusion = tf.confusion_matrix(labels=labels, predictions=predictions)

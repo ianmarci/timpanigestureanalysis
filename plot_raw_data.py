@@ -1,6 +1,17 @@
+################################################################################
+# plot_raw_data.py                                                             #
+# Ian Marci 2017                                                               #
+# Plots single raw data file. Identify file using command line arguments.      #
+################################################################################
+
+# Imports
 import sys
 from get_data import get_data
 import matplotlib.pyplot as plt
+
+########
+# Main #
+########
 
 if len(sys.argv) != 2:
     print('Incorrect usage: plot_raw_data.py file_to_plot')

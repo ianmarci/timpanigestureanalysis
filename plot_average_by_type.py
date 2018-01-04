@@ -1,8 +1,18 @@
+################################################################################
+# plot_average_by_type.py                                                      #
+# Ian Marci 2017                                                               #
+# Calculates  and plots the average trajectory for each articulation type.     #
+################################################################################
+
+# Imports
 import matplotlib.pyplot as plt
 import sys
 import glob
 import numpy as np
 
+#############
+# Functions #
+#############
 def get_averages(mypath, hand):
     files = [file for file in glob.glob(mypath + '*/**/*.txt', recursive=True)]
 
@@ -149,9 +159,11 @@ def plot_all(yLabel, hand, aAverage, nAverage,
         plt.title('Average %s mallet acceleration by stroke type' % hand)
     plt.show()
 
-
+############
+#   Main   #
+############
 hand_options = ['R', 'L']
-data_options = ['stroke', 'velocity', 'acceleration']
+data_options = ['position', 'velocity', 'acceleration']
 
 choice = sys.argv[1]
 hand = sys.argv[2]
@@ -160,7 +172,7 @@ if (len(sys.argv) != 3 or hand not in hand_options
     or choice not in data_options):
 
     print('Usage Error: plotAveragebyType.py dataTypeChoice hand')
-    print('dataTypeChoice options: stroke, velocity, acceleration')
+    print('dataTypeChoice options: position, velocity, acceleration')
     print('hand options: R, L')
     print('Example: plotAveragebyType.py velocity R')
     sys.exit()
@@ -170,7 +182,8 @@ if choice == 'velocity':
     mypath = 'Data/StrokeVelocityData'
     length = 200
     yLabel = 'Velocity (m/s)'
-    aAverage, nAverage, pAverage, sAverage, tAverage, vAverage = get_averages(mypath, hand)
+    aAverage, nAverage, pAverage, sAverage, tAverage, vAverage =get_averages(
+                                                                   mypath, hand)
     plot_all(yLabel, hand, aAverage, nAverage,
                            pAverage, sAverage,
                            tAverage, vAverage)
@@ -179,11 +192,12 @@ elif choice == 'acceleration':
     mypath = 'Data/StrokeAccelerationData'
     length = 200
     yLabel = 'Acceleration (m/s^2)'
-    aAverage, nAverage, pAverage, sAverage, tAverage, vAverage = get_averages(mypath, hand)
+    aAverage, nAverage, pAverage, sAverage, tAverage, vAverage =get_averages(
+                                                                   mypath, hand)
     plot_all(yLabel, hand, aAverage, nAverage,
                            pAverage, sAverage,
                            tAverage, vAverage)
-elif choice == 'stroke':
+elif choice == 'position':
     print('Showing stroke position data')
     mypath = 'Data/StrokePositionData'
     length = 200

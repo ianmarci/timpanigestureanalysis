@@ -1,10 +1,6 @@
-import random
-import glob
-import shutil
-import sys
-import os
-
 ################################################################################
+# divide_into_sets.py                                                          #
+# Ian Marci 2017                                                               #
 # Function which randomly divides files in the selected folder into 4 equal    #
 # sets. User chooses which data folder to use as well as the hand to study.    #
 #                                                                              #
@@ -14,6 +10,16 @@ import os
 # Data sets will be placed in 'Data/NetworkInput' for future classification.   #
 ################################################################################
 
+# Imports
+import random
+import glob
+import shutil
+import sys
+import os
+
+###################
+# Arguments check #
+###################
 if len(sys.argv) != 3:
     print('Usage error. Incorrect number of arguments.')
     print('Usage: python divide_into_sets.py path_to_data hand_choice')
@@ -28,6 +34,9 @@ if hand_choice != 'R' and hand_choice != 'L':
 
 out_path = 'Data\\NetworkInput\\'
 
+########
+# Main #
+########
 # Find files in target folder
 data_files = [file for file in glob.glob(data_path + '/*.txt')]
 

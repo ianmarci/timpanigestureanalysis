@@ -133,20 +133,15 @@ plt.subplot(231)
 for i in range(0, len(accent)):
     plt.plot(x, accent[i,:])
 plt.title('Accent')
-plt.xlabel('Time (ms)')
 plt.ylabel(yLabel)
 plt.subplot(232)
 for i in range(0, len(normal)):
     plt.plot(x, normal[i,:])
 plt.title('Normal')
-plt.xlabel('Time (ms)')
-plt.ylabel(yLabel)
 plt.subplot(233)
 for i in range(0, len(piston)):
     plt.plot(x, piston[i,:])
 plt.title('Piston')
-plt.xlabel('Time (ms)')
-plt.ylabel(yLabel)
 plt.subplot(234)
 for i in range(0, len(staccato)):
     plt.plot(x, staccato[i,:])
@@ -158,11 +153,9 @@ for i in range(0, len(tenuto)):
     plt.plot(x, tenuto[i,:])
 plt.title('Tenuto')
 plt.xlabel('Time (ms)')
-plt.ylabel(yLabel)
 plt.subplot(236)
 for i in range(0, len(vertical)):
     plt.plot(x, vertical[i,:])
 plt.title('Vertical')
 plt.xlabel('Time (ms)')
-plt.ylabel(yLabel)
 plt.show()
