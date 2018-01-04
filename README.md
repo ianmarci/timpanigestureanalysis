@@ -23,9 +23,19 @@ To use the classifier, divide the data into sets using:
 python divide_into_sets.py path_to_data hand_choice
 ex. python divide_into_sets.py 'Data\StrokePositionData' R
 ```
-This example will extract all the right hand strokes from the position data folder and divide them into 4 sets for testing. 
+This example will extract all the right hand strokes from the position data folder, place it into the NetworkInput folder, and divide them into 4 sets for testing.  
 
-Once
+### Classification
+Once the data has been divided, classify by using:
+```
+python run_experiment.py
+```
+
+The script will print the average accuracy over the 4-fold cross validation as well as the confusion matrix.
+
+Accuracies range from 93 - 99% based on the the distribution of stroke types placed into the sets by the divide_into_sets script.
+### Visualization
+
 
 
 
