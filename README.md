@@ -6,11 +6,14 @@ My current research involves studying the differences in gesture of the dominant
 
 ## Getting Started
 
-The project is written using Python 3.5.4 and has not yet been made backwards compatible. Install the prerequisites (below) and clone the repository. Before any gesture data can be extracted, the raw data files must be segmented.
+The project is written using Python 3.5.4 and has not yet been made backwards compatible. Install the prerequisites (below) and clone the repository. 
+### Prerequisites
+```
+numpy matplotlib
+```
+Before any gesture data can be extracted, the raw data files must be segmented.
 ```
 python segment_stroke_data.py
 ```
 Once the data have been segmented, 
-```
-numpy matplotlib
-```
+
