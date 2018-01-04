@@ -36,18 +36,25 @@ The script will print the average accuracy over the 4-fold cross validation as w
 Accuracies range from 93 - 99% based on the the distribution of stroke types placed into the sets by the divide_into_sets script.
 ### Visualization
 To plot the data, use one of the plotting scripts.
-  #### Plot by Type
-  By using the plot_by_type function, one can see all strokes made using either the left or right hand. The strokes will be plotted by stroke type.
-  ```
-  python plot_by_type.py data_type hand_choice
-  ```
-  data_type can be either position, velocity, or acceleration.
-  hand_choice can be either R or L for right and left.
+#### Plot by Type
+By using the plot_by_type function, one can see all strokes made using either the left or right hand. The strokes will be plotted by stroke type.
+```
+python plot_by_type.py data_type hand_choice
+```
+data_type can be either position, velocity, or acceleration.
+hand_choice can be either R or L for right and left.
 
-  For example, to plot the position data of the right hand, use:
-  ```
-  python plot_by_type.py position R
-  ```
+For example, to plot the position data of the right hand, use:
+```
+python plot_by_type.py position R
+```
+#### Plot Average by Type
+plot_average_by_type.py uses the same arguments as plot_by_type.py but will plot the averages instead of the individual trajectories.
+
+```
+python plot_average_by_type.py velocity L
+```
+This will plot the average velocity of the left mallet for each stroke type.
 
 
 
