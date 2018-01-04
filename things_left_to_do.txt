@@ -1,7 +1,0 @@
-DONE - Remove all \\ checking and adjust variables accordingly
-
-DONE - Complete remove_outliers.py
-
-Check that \\ stuff works on Linux, so that it will work on Mac
-
-DONE - Complete setup.py or bash script that runs all scripts to show graphs and results
