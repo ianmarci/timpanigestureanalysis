@@ -1,6 +1,6 @@
 # Timpani Gesture Analysis
 
-Project to visualize and classify different musical articulations of a timpani player. A k-nearest neighbor classifier implemented in Tensorflow identifies timpani gestures based only on the vertical trajectory of the mallet. Six different articulations(accent, normal, piston, staccato, tenuto, and vertical accent) are compared. The player performed each of these articulations in three different plying positions on the drum (center, normal, and rim). Different articulations are correctly classified more than 93% of the time.
+Project to visualize and classify different musical articulations of a timpani player. A k-nearest neighbor classifier implemented in Tensorflow identifies timpani gestures based only on the vertical trajectory of the mallet. Six different articulations (accent, normal, piston, staccato, tenuto, and vertical accent) are compared. The player performed each of these articulations in three different plying positions on the drum (center, normal, and rim). Different articulations are correctly classified more than 93% of the time.
 
 My current research involves studying the differences in gesture of the dominant and non-dominant hand of percussionists. This code will be expanded to assist me in the analysis for my Master's thesis: Handedness in Percussion Performance.
 
